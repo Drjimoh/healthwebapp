@@ -1,0 +1,257 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/img/favicon.ico' %}">
+    <title>Preclinic - Medical & Hospital - Bootstrap 4 Admin Template</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}">
+    <!--[if lt IE 9]>
+        <script src="assets/js/html5shiv.min.js"></script>
+        <script src="assets/js/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <div class="main-wrapper">
+
+        <div class="header">
+            <div class="header-left">
+                <a href="index-2.html" class="logo">
+                    <img src="assets/img/logo.png" width="35" height="35" alt=""> <span>Preclinic</span>
+                </a>
+            </div>
+            <ul class="nav user-menu float-right">
+                <li class="nav-item">
+                    <a href="{% url 'ehealth:homepage' %}" class="nav-link"><i class="fa"></i> <span class="float-right">Home</span></a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'authentication:join' %}" class="nav-link"> <span class="float-right">Sign up </span></a>
+                </li>
+                <li class="nav-item dropdown has-arrow">
+                    <a href="{% url 'authentication:login' %}" class="nav-link">
+                       
+                            
+                        <span>Login</span>
+                    </a>
+                   
+                </li>
+            </ul>
+             <div class="dropdown mobile-user-menu float-right">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item" href="{% url 'ehealth:homepage' %}">Home</a>
+                    <a class="dropdown-item" href="{% url 'authentication:join' %}">Sign up</a>
+                    <!-- <a class="dropdown-item" href="settings.html">Settings</a>
+ -->                    <a class="dropdown-item" href="{% url 'authentication:login' %}">Login</a>
+                </div>
+            </div>
+        </div>
+
+       
+        <div class="page-wrapper">
+            <div class="content">
+               
+               <div class="fixed-background"></div>
+    <main>
+        <div class="container">
+            <div class="row h-100">
+                <div class="col-12 col-md-10 mx-auto my-auto">
+                    <div class="card auth-card">
+                        <div class="position-relative image-side">
+                            <p>Medical Practioner Sign Up</p>
+                        </div>
+                        <div class="form-side" style="align-content: center; padding-left: 40px;">
+                            <a href="#">
+                                <span class="logo-single"></span>
+                            </a>
+                            {% if error %}
+                                <div class="alert alert-danger red">Invalid login details!</div>
+                            {% endif %}
+                            <form class="login-form" id="signupform" method="POST" action="{% url 'authentication:auth' %}" onsubmit="return false" >
+                                <input class="form-control" type="hidden" name="target" value="staff-signup">
+                                <h6 class="mb-4">Fill this form to Sign up</h6>
+                                {% csrf_token %}
+                                <label class="form-group has-float-label mb-4">
+                                    <span>First name:  <input class="form-control" type="text" name="fname" required></span>
+                                </label>
+                                
+                                <label class="form-group has-float-label mb-4">
+                                    <span>Last name: </span>
+                                    <input class="form-control" type="text" name="lname" >
+                                </label>
+                                <br>
+                                <label class="form-group has-float-label mb-4">
+                                    <span>Username:  <input class="form-control " id="id_username" type="text" name="username" required></span>
+                                </label>
+                                
+                                <label class="form-group has-float-label mb-4">
+                                    <span>Email: </span>
+                                    <input class="form-control" id="id_email" id="id_email" type="text" name="email" required>
+                                </label>
+                                <br>
+                                <label class="form-group has-float-label mb-4">
+                                    <span>Qualification : </span>
+                                    <input class="form-control" type="text" name="qualification" required>
+                                </label>
+
+                                <label class="form-group has-float-label mb-4">
+                                    <span>Phone Number: </span>
+                                    <input class="form-control" type="text" name="number" required>
+                                </label>
+                                <br>
+                                <!-- <label class="form-group has-float-label mb-4">
+                                    <span>Address: </span>
+                                    <textarea class="form-control" name="address" required>
+                                        
+                                    </textarea> 
+                                </label> -->
+                                <br>
+                                <label class="form-group has-float-label mb-4">
+                                    <span>Password:</span>
+                                    <input class="form-control" type="password" placeholder="minimum of 8 characters"
+                                           name="password1">
+                                </label>
+                                <label class="form-group has-float-label mb-4">
+                                    <span>Repeat Password:</span>
+                                    <input class="form-control" type="password" placeholder="minimum of 8 characters"
+                                           name="password2">
+                                </label><br>
+                                <input type="checkbox" name="check" id="GFG"
+                    value="1" required>  I agree to the <A href="#" target="_blank"> Terms and Conditions </A><br>  
+                                <div class="d-flex justify-content-between align-items-center" >
+                                    <a id="retrieve" href="{% url 'authentication:login' %}">Have an account? Login</a>
+                                    <button class="btn btn-primary btn-lg btn-shadow ladda-button login-btn" data-style="zoom-in" align-items-center><span class="label" >JOIN</span></button>
+                                </div>
+                                <br>
+<br>
+<br>
+
+                            </form>
+
+                            <form class="retrieve-form" style="display: none">
+                                <h6 class="mb-4">Retrieve Password</h6>
+                                <label class="form-group has-float-label mb-4">
+                                    <input class="form-control" type="text" name="username">
+                                    <span>E-mail/Number</span>
+                                </label>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <a id="login" href="javascript:void(0);">Know your password now?</a>
+                                    <input class="btn btn-primary btn-lg btn-shadow ladda-button" type="submit" name="submit">                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+<script>
+
+    $(document).ready(function () {
+      //your code here
+      $("#id_username").change(function () {
+          username = $(this).val();
+          $.ajax({
+            url: "{% url 'authentication:validate_username' %}",
+            data: {
+                'username':username
+            },
+            dataType: 'json',
+            success: function(data){
+                if (data.is_taken){
+
+                    alert("username already exists.");
+                    $('#id_username').val('');
+                    $('#id_username').attr("placeholder", "username required");
+                }
+            }
+          });
+        }); 
+     $("#id_email").change(function () {
+          email = $(this).val();
+          $.ajax({
+            url: "{% url 'authentication:validate_email' %}",
+            data: {
+                'email':email
+            },
+            dataType: 'json',
+            success: function(data){
+                if (data.is_taken){
+
+                    alert("email already exists.");
+                    $('#id_email').val('');
+                    $('#id_email').attr("placeholder", "email required");
+                }
+            }
+          });
+        }); 
+
+ $("#signupform").submit(function (e){
+    e.preventDefault();
+    var form = $(this);
+    var url = form.attr('action');
+
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: form.serialize(),
+        success: function(data){
+            if(data.status=='successful'){
+                alert('Sign up successful, your account will undergo verification in 24hrs');
+                location ='{% url "authentication:login" %}';
+            }
+            if (data.status == 'e'){
+                alert('Sign up Unsuccessful, please try again');
+            }
+            if (data.status == 'password mismatch'){
+                alert('password mismatch');
+            }
+        }
+    })
+ })
+});
+  
+
+
+</script>
+
+
+<!-- code goes in here -->
+
+
+
+
+
+
+            </div>
+            
+        </div>
+    </div>
+     <div class="sidebar-overlay" data-reff=""></div>
+     <script src="{% static 'assets/js/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static 'assets/js/popper.min.js' %}"></script>
+    <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.slimscroll.js' %}"></script>
+    <script src="{% static 'assets/js/Chart.bundle.js' %}"></script>
+    <script src="{% static 'assets/js/chart.js' %}"></script>
+    <script src="{% static 'assets/js/app.js' %}"></script>
+
+    <script src="{% static 'assets/js/select2.min.js' %}"></script>
+    <script src="{% static 'assets/js/moment.min.js' %}"></script>
+    <script src="{% static 'assets/js/bootstrap-datetimepicker.min.js' %}"></script>
+</body>
+
+<!-- add-patient24:07-->
+</html>

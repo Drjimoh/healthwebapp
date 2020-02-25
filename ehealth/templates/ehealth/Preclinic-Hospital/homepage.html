@@ -1,0 +1,170 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/img/favicon.ico' %}">
+    <title>Preclinic - Medical & Hospital - Bootstrap 4 Admin Template</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}">
+    <!--[if lt IE 9]>
+        <script src="assets/js/html5shiv.min.js"></script>
+        <script src="assets/js/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <div class="main-wrapper">
+
+        <div class="header">
+            <div class="header-left">
+                <a href="index-2.html" class="logo">
+                    <img src="assets/img/logo.png" width="35" height="35" alt=""> <span>Preclinic</span>
+                </a>
+            </div>
+            <ul class="nav user-menu float-right">
+                <li class="nav-item">
+                    <a href="{% url 'ehealth:homepage' %}" class="nav-link"><i class="fa"></i> <span class="float-right">Home</span></a>
+                </li>
+                {% if patient %}
+                 <li class="nav-item">
+                    <a href="{% url 'ehealth:patient_dash' %}" class="nav-link"><i class="fa"></i> <span class="float-right">My Dashboard</span></a>
+                </li>
+                <li class="nav-item dropdown has-arrow">
+                    <a href="{% url 'authentication:logout' %}" class="nav-link">
+                       
+                            <span class="status online"></span></span>
+                        <span>Logout</span>
+                    </a>
+                   
+                </li>
+                {% elif doctor %}
+                <li class="nav-item">
+                    <a href="{% url 'ehealth:health_dash' %}" class="nav-link"><i class="fa"></i> <span class="float-right">My Dashboard</span></a>
+                </li>
+                <li class="nav-item dropdown has-arrow">
+                    <a href="{% url 'authentication:logout' %}" class="nav-link">
+                       
+                            <span class="status online"></span></span>
+                        <span>Logout</span>
+                    </a>
+                   
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a href="{% url 'authentication:join' %}" class="nav-link"> <span class="float-right">Sign up </span></a>
+                </li>
+                <li class="nav-item dropdown has-arrow">
+                    <a href="{% url 'authentication:login' %}" class="nav-link">
+                       
+                            
+                        <span>Login</span>
+                    </a>
+                   
+                </li>
+                {% endif %}
+            </ul>
+             <div class="dropdown mobile-user-menu float-right">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item" href="{% url 'ehealth:homepage' %}">Home</a>
+                    {% if doctor %}
+
+                    {% elif patient %}
+                    <a class="dropdown-item" href="{% url 'ehealth:patient_dash' %}">My Dashboard</a>
+                    <!-- <a class="dropdown-item" href="settings.html">Settings</a>
+ -->                    <a class="dropdown-item" href="{% url 'authentication:logout' %}">Logout</a>
+                    {% else %}
+                    <a class="dropdown-item" href="{% url 'authentication:join' %}">Sign up</a>
+                    <!-- <a class="dropdown-item" href="settings.html">Settings</a>
+ -->                    <a class="dropdown-item" href="{% url 'authentication:login' %}">Login</a>
+                    {% endif %}                </div>
+            </div>
+        </div>
+
+       
+        <div class="page-wrapper">
+            <div class="content">
+               
+                    <div class="row">
+                        <div class="col-12 col-md-6 col-lg-4 col-xl-4">
+                        <div class="card member-panel">
+                            <div class="card-header bg-white">
+                                <h4 class="card-title mb-0">Our Doctors</h4>
+                            </div>
+                            <div class="card-body">
+                                <ul class="contact-list">
+                                    {% for doctor in doctors_list %}
+                                    <li>
+                                        <div class="contact-cont">
+                                            <div class="float-left user-img m-r-10">
+                                                <a href="profile.html" title="John Doe"><img src="{% static 'assets/img/user.jpg' %}" alt="" class="w-40 rounded-circle"><span class="status online"></span></a>
+                                            </div>
+                                            <div class="contact-info">
+                                                <span class="contact-name text-ellipsis">{{ doctor.first_name.upper  }} {{ doctor.last_name.upper }}</span>
+                                                <span class="contact-date">{{ doctor.qualification.upper }}</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            <div class="card-footer text-center bg-white">
+                                <a href="{% url 'ehealth:all_doctors' %}" class="text-muted">View all Doctors</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4 col-xl-4">
+                        <div class="hospital-barchart">
+                            <h4 class="card-title d-inline-block">Cases</h4>
+                        </div>
+                        <div class="bar-chart">
+                           
+                            <div class="chart clearfix">
+                                {% for case in case_list %}
+                                <div class="item">
+                                    <div class="bar">
+                                        <span class="percent">{{ case.freq }}</span>
+                                        <div class="item-progress" data-percent="16">
+                                            <span class="title">{{ case.name }} Patient</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                               
+                            </div>
+                        </div>
+                     </div>
+
+                    </div>
+
+
+
+            </div>
+			
+        </div>
+    </div>
+     <div class="sidebar-overlay" data-reff=""></div>
+     <script src="{% static 'assets/js/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static 'assets/js/popper.min.js' %}"></script>
+    <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.slimscroll.js' %}"></script>
+    <script src="{% static 'assets/js/Chart.bundle.js' %}"></script>
+    <script src="{% static 'assets/js/chart.js' %}"></script>
+    <script src="{% static 'assets/js/app.js' %}"></script>
+
+    <script src="{% static 'assets/js/select2.min.js' %}"></script>
+    <script src="{% static 'assets/js/moment.min.js' %}"></script>
+    <script src="{% static 'assets/js/bootstrap-datetimepicker.min.js' %}"></script>
+</body>
+
+<!-- add-patient24:07-->
+</html>
